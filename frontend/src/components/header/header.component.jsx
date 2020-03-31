@@ -6,8 +6,8 @@ const Header = () => {
     <header className="header">
       <nav className="navbar navbar-default">
         <a className="navbar-brand" href="#">Zesty.ai</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
             <Link className="nav-item active navbar-text" to="/">Home</Link>
             <Link className="nav-item navbar-text" to="/">My Properties</Link>
           </ul>

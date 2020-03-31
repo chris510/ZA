@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { PropertyContext } from '../../providers/property.provider';
 
-const PropertyItem = ({ imageUrl, lng, lat }) => {
+const PropertyItem = ({ address, lng, lat }) => {
+  const { reverseGeocode, currLat, currLng } = useContext(PropertyContext);
+
   return (
     <div className="property-item">
-      THIS IS THE PROPERTY ITEMS
-      <img src={imageUrl}></img>
-      {lng}
-      {lat}
+      Found address: {reverseGeocode} at (Latitude: {currLat}, Longitude: {currLng} )
     </div>
   )
 }
