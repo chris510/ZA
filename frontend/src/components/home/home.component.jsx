@@ -6,7 +6,7 @@ import GoogleMap from '../googleMap/googleMap.component';
 const Home = () => {
   return (
     <div className="home">
-      <GoogleMap/>
+      {/* <GoogleMap/> */}
       <Search/>
     </div>
   )

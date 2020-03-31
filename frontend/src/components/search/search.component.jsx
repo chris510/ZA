@@ -52,9 +52,10 @@ const Search = () => {
   const renderSearchParameters = () => {
     if (searchMode) {
       return (
-        <div className="search-inputs">
+        <div className="form-group">
           <label>Address</label>
           <input 
+            className="form-control"
             type="text"
             placeholder="Address"
             name="add"
@@ -66,21 +67,27 @@ const Search = () => {
     } else {
       return (
         <div className="search-inputs">
+          <label>Longitude</label>
           <input 
+            className="form-control"
             type="number"
             placeholder="Longitude"
             name="lng"
             value={lng}
             onChange={handleInputChange}
           />
-          <input 
+          <label>Latitude</label>
+          <input
+            className="form-control"
             type="number"
             placeholder="Latitude"
             name="lat"
             value={lat}
             onChange={handleInputChange}
           />
-          <input 
+          <label>Radius</label>
+          <input
+            className="form-control"
             type="number"
             placeholder={rad}
             name="Radius"
@@ -96,12 +103,11 @@ const Search = () => {
     <div className="search">
       <form className="form-group" onSubmit={handleSubmit}>
         {renderSearchParameters()}
-        <br/>
+        <button type="button" onClick={handleSearchModeChange} className="btn btn-info mr-1">
+          Switch to {searchName}
+        </button>
         <button type="submit" className="btn btn-primary">Search</button>
       </form>
-      <button type="button" onClick={handleSearchModeChange} className="btn btn-info">
-         Switch to {searchName}
-      </button>
       {
         foundProperty ?
         <PropertyItem
