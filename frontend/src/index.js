@@ -5,14 +5,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import PropertyProvider from './providers/property.provider';
+import PropertyProvider from './providers/property/property.provider';
+import GeolocateProvider from './providers/geolocate/geolocate.provider';
 
 ReactDOM.render(
   // <React.StrictMode>
     <BrowserRouter>
-      <PropertyProvider>
-        <App />
-      </PropertyProvider>
+      <GeolocateProvider>
+        <PropertyProvider>
+          <App />
+        </PropertyProvider>
+      </GeolocateProvider>
     </BrowserRouter>,
   // </React.StrictMode>,
   document.getElementById('root')

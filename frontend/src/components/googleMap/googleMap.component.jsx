@@ -1,7 +1,7 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import './googleMap.styles.scss';
-import { fetchProperties } from '../../providers/property.util';
+import { fetchProperties } from '../../providers/property/property.util';
 
 // const testCoordinates = [
 //   { lng: -73.748751,

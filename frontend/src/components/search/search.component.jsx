@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import './search.styles.scss'
-import { PropertyContext } from '../../providers/property.provider';
+import { PropertyContext } from '../../providers/property/property.provider';
 
 import PropertyItem from '../propertyItem/propertyItem.component';
+import { GeolocateContext } from '../../providers/geolocate/geolocate.provider';
 
 const Search = () => {
-  const { getAddressFromCoordinates, foundAddress } = useContext(PropertyContext);
+  // const { getAddressFromCoordinates, getCoordinatesFromAddress } = useContext(PropertyContext)
+  const { getAddressFromCoordinates, getCoordinatesFromAddress } = useContext(GeolocateContext);
   
   const [lng, setLng] = useState('');
   const [lat, setLat] = useState('');
@@ -24,10 +26,10 @@ const Search = () => {
     //   setFoundProperty(true);
     // });
     if (!searchMode) {
-      console.log(getAddressFromCoordinates())
+      console.log(getAddressFromCoordinates());
       setFoundProperty(true);
     } else {
-      console.log('Retrieve image from address')
+      console.log(getCoordinatesFromAddress());
       setFoundProperty(true);
     }
   }
@@ -123,15 +125,7 @@ const Search = () => {
         </button>
         <button type="submit" className="btn btn-primary">Search</button>
       </form>
-      {
-        foundProperty ?
-        <PropertyItem
-          address={foundAddress}
-          lng={lng}
-          lat={lat}
-        />
-      : null
-      }
+      { foundProperty ? <PropertyItem/> : null }
     </div>
   )
 }

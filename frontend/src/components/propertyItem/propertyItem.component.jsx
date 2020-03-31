@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { PropertyContext } from '../../providers/property.provider';
+import { GeolocateContext } from '../../providers/geolocate/geolocate.provider';
 
-const PropertyItem = ({ address, lng, lat }) => {
-  const { reverseGeocode, currLat, currLng } = useContext(PropertyContext);
+const PropertyItem = () => {
+  const { currentAddress, currLat, currLng } = useContext(GeolocateContext);
 
   return (
     <div className="property-item">
-      Found address: {reverseGeocode} at (Latitude: {currLat}, Longitude: {currLng} )
+      Found address: {currentAddress} at (Latitude: {currLat}, Longitude: {currLng} )
     </div>
   )
 }

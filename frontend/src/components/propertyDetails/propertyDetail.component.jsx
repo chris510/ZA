@@ -1,6 +1,6 @@
 import React from 'react';
 import './propertyDetail.styles.scss';
-import { fetchPropertyImage, fetchPropertyStatistics } from '../../providers/property.util';
+import { fetchPropertyImage, fetchPropertyStatistics } from '../../providers/property/property.util';
 
 class PropertyDetail extends React.Component {
   constructor() {
