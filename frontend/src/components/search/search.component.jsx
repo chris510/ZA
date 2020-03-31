@@ -2,12 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import './search.styles.scss'
 import { PropertyContext } from '../../providers/property/property.provider';
-
-import PropertyItem from '../propertyItem/propertyItem.component';
 import { GeolocateContext } from '../../providers/geolocate/geolocate.provider';
 
+import PropertyItem from '../propertyItem/propertyItem.component';
+import AddressSearchInput from '../addressSearchInput/addressSearchInput.component';
+
 const Search = () => {
-  // const { getAddressFromCoordinates, getCoordinatesFromAddress } = useContext(PropertyContext)
+  const { getPropertyImage } = useContext(PropertyContext)
   const { getAddressFromCoordinates, getCoordinatesFromAddress } = useContext(GeolocateContext);
   
   const [lng, setLng] = useState('');
@@ -16,20 +17,22 @@ const Search = () => {
   const [address, setAddress] = useState('');
   const [searchMode, setSearchMode] = useState(true);
   const [searchName, setSearchName] = useState('Coordinates');
-  // const [propertyImageUrl, setPropertyImageUrl] = useState('');
+  const [propertyImageUrl, setPropertyImageUrl] = useState('');
   const [foundProperty, setFoundProperty] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // getPropertyImage().then(res => {
-    //   setPropertyImageUrl(res.data);
-    //   setFoundProperty(true);
-    // });
+    getPropertyImage().then(res => {
+      console.log(res);
+      setPropertyImageUrl(res);
+      setFoundProperty(true);
+    });
+
     if (!searchMode) {
-      console.log(getAddressFromCoordinates());
+      getAddressFromCoordinates();
       setFoundProperty(true);
     } else {
-      console.log(getCoordinatesFromAddress());
+      getCoordinatesFromAddress();
       setFoundProperty(true);
     }
   }
@@ -60,11 +63,20 @@ const Search = () => {
   //Gives user search option based on address or coordinates
   const renderSearchParameters = () => {
     if (searchMode) {
-      return (
+      return ( 
         <div className="search-inputs">
+          {/* <div className="form-group">
+            <label>Address</label>
+            <AddressSearchInput
+              className="form-control"
+              address={address}
+              setAddress={setAddress}
+            />
+          </div> */}
           <div className="form-group">
             <label>Address</label>
-            <input 
+            <input
+              id="search-address-text"
               className="form-control"
               type="text"
               placeholder="Address"
@@ -125,7 +137,7 @@ const Search = () => {
         </button>
         <button type="submit" className="btn btn-primary">Search</button>
       </form>
-      { foundProperty ? <PropertyItem/> : null }
+      { foundProperty ? <PropertyItem imageUrl={propertyImageUrl}/> : null }
     </div>
   )
 }

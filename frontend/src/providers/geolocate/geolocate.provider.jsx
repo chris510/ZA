@@ -1,9 +1,9 @@
 import React, { createContext, useState } from 'react';
 import Geocode from 'react-geocode';
+
 // TODO: MOVE API Key into .ENV
 Geocode.setApiKey("AIzaSyD4PuYfksB_JR8ieyQ_2rcTzsedzzJO5h8");
 Geocode.setLanguage("en");
-// Enable or disable logs. Its optiona
 Geocode.enableDebug();
 
 export const GeolocateContext = createContext({
@@ -12,6 +12,7 @@ export const GeolocateContext = createContext({
   currLng: 0,
 });
 
+// TODO: TEST Performance of reinstantiated javascript objects after each re-render (UseCallback/UseMemo)
 const GeolocateProvider = ({ children }) => {
   const [currentAddress, setCurrentAddress] = useState('');
   const [currLat, setCurrLat] = useState(0);
@@ -23,7 +24,7 @@ const GeolocateProvider = ({ children }) => {
     setCurrLng(lng);
   }
 
-  const getAddressFromCoordinates = () => {
+  const getAddressFromCoordinates = (lat, lng) => {
     return Geocode.fromLatLng("37.786213321321", "-122.4045").then(
       response => {
         const address = response.results[0].formatted_address;
@@ -36,7 +37,7 @@ const GeolocateProvider = ({ children }) => {
     );
   }
 
-  const getCoordinatesFromAddress = () => {
+  const getCoordinatesFromAddress = (address) => {
     return Geocode.fromAddress("San Francisco").then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;

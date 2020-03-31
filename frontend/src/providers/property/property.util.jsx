@@ -19,7 +19,17 @@ export const fetchProperties = () => {
 }
 
 export const fetchPropertyImage = () => {
-  return axios.get('/display/"f1650f2a99824f349643ad234abff6a2"?overlay=yes&building=green&parcel=orange');
+  return axios.get('/display/"f853874999424ad2a5b6f37af6b56610"?overlay=yes&building=green&parcel=orange', { responseType: 'arraybuffer' })
+    .then((response) => {
+      // Converts binary to base64
+      // console.log(response)
+      // let image = btoa(
+      //   new Uint8Array(response.data)
+      //     .reduce((data, byte) => data + String.fromCharCode(byte), '')
+      // );
+      const image = new Buffer(response.data, 'binary').toString('base64')
+      return (`data:${response.headers['content-type'].toLowerCase()};base64,${image}`);
+  });
 }
 
 export const fetchPropertyStatistics = () => {
