@@ -9,21 +9,20 @@ import AddressSearchInput from '../addressSearchInput/addressSearchInput.compone
 
 const Search = () => {
   const { getPropertyImage } = useContext(PropertyContext)
-  const { getAddressFromCoordinates, getCoordinatesFromAddress } = useContext(GeolocateContext);
+  const { getAddressFromCoordinates, getCoordinatesFromAddress, errorMsg } = useContext(GeolocateContext);
   
   const [lng, setLng] = useState('');
   const [lat, setLat] = useState('');
   const [rad, setRad] = useState(10000);
   const [address, setAddress] = useState('');
-  const [searchMode, setSearchMode] = useState(true);
+  const [searchMode, setSearchMode] = useState(false);
   const [searchName, setSearchName] = useState('Coordinates');
   const [propertyImageUrl, setPropertyImageUrl] = useState('');
-  const [foundProperty, setFoundProperty] = useState(false);
+  const [foundProperty, setFoundProperty] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     getPropertyImage().then(res => {
-      console.log(res);
       setPropertyImageUrl(res);
       setFoundProperty(true);
     });
@@ -58,6 +57,10 @@ const Search = () => {
       setSearchMode(true);
       setSearchName('Coordinates');
     }
+  }
+
+  const renderErrorMsg = () => {
+    return errorMsg ? <div className="alert alert-danger">{errorMsg}</div> : null
   }
 
   //Gives user search option based on address or coordinates
@@ -95,7 +98,7 @@ const Search = () => {
             <input
               className="form-control"
               type="number"
-              placeholder="Latitude"
+              placeholder="26.709723"
               name="lat"
               value={lat}
               onChange={handleInputChange}
@@ -106,7 +109,7 @@ const Search = () => {
             <input 
               className="form-control"
               type="number"
-              placeholder="Longitude"
+              placeholder="-80.064163"
               name="lng"
               value={lng}
               onChange={handleInputChange}
@@ -130,14 +133,16 @@ const Search = () => {
 
   return (
     <div className="search">
+      { foundProperty && !errorMsg ? <PropertyItem imageUrl={propertyImageUrl}/> : null }
+      <h3>Search Parameters</h3>
       <form className="form-group" onSubmit={handleSubmit}>
         {renderSearchParameters()}
+        {renderErrorMsg()}
         <button type="button" onClick={handleSearchModeChange} className="btn btn-info mb-2">
           Switch to {searchName}
         </button>
         <button type="submit" className="btn btn-primary">Search</button>
       </form>
-      { foundProperty ? <PropertyItem imageUrl={propertyImageUrl}/> : null }
     </div>
   )
 }

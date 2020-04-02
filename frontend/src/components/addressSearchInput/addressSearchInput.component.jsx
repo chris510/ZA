@@ -14,6 +14,7 @@ const AddressSearchInput = ({ address, setAddress}) => {
     setAddress(address);
   }
 
+  // Autopopulates city search query
   const renderInput = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
     <div className="autocomplete-root">
     <input className="form-control" {...getInputProps()} />
