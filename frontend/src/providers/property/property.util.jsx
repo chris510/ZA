@@ -31,3 +31,15 @@ export const fetchPropertyImage = () => {
 export const fetchPropertyStatistics = () => {
   return axios.get('statistics/f853874999424ad2a5b6f37af6b56610?distance=1755000');
 }
+
+// TODO: CREATE bakcend method
+export const saveProperty = () => {
+  console.log('Property has been saved!');
+}
+
+// TODO: Ceate Backend methkd
+export const removeProperty = () => {
+  console.log('Property has been removed');
+}
+
+// 

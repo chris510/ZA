@@ -8,8 +8,8 @@ const Header = () => {
         <a className="navbar-brand" href="#">Zesty.ai</a>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <Link className="nav-item active navbar-text" to="/">Home</Link>
-            <Link className="nav-item navbar-text" to="/">My Properties</Link>
+            <Link className="nav-item nav-item navbar-text nav-link" to="/">Home</Link>
+            <Link className="nav-item navbar-text" to="/property-list">My Properties</Link>
           </ul>
         </div>
       </nav>

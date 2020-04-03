@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import Geocode from 'react-geocode';
 
 // TODO: MOVE API Key into .ENV
-Geocode.setApiKey("AIzaSyD4PuYfksB_JR8ieyQ_2rcTzsedzzJO5h8");
+Geocode.setApiKey("AIzaSyAvMyZR9_ng1BAktgNp2fbnjeTyJsZ43fk");
 Geocode.setLanguage("en");
 Geocode.enableDebug();
 
@@ -20,7 +20,6 @@ const GeolocateProvider = ({ children }) => {
   const [currLat, setCurrLat] = useState(26.709723);
   const [currLng, setCurrLng] = useState(-80.064163);
   const [errorMsg, setErrorMsg] = useState('');
-
   const setFoundProperty = (address, lat, lng) => {
     setCurrentAddress(address);
     setCurrLat(lat);
@@ -29,11 +28,11 @@ const GeolocateProvider = ({ children }) => {
 
   // "37.786213321321", "-122.4045"
   const getAddressFromCoordinates = (lat, lng) => {
-    return Geocode.fromLatLng("37.786213321321", "-122.4045").then(
+    return Geocode.fromLatLng(lat, lng).then(
       response => {
         const address = response.results[0].formatted_address;
         console.log(address);
-        setFoundProperty(address, "37.786213321321", "-122.4045")
+        setFoundProperty(address, lat, lng)
       },
       error => {
         console.error(error);
@@ -43,11 +42,11 @@ const GeolocateProvider = ({ children }) => {
   }
 
   const getCoordinatesFromAddress = (address) => {
-    return Geocode.fromAddress("New York").then(
+    return Geocode.fromAddress(address).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         console.log(lat, lng);
-        setFoundProperty("New York", lat, lng)
+        setFoundProperty(address, lat, lng)
       },
       error => {
         console.error(error);

@@ -12,7 +12,7 @@ const PropertyItem = ({imageUrl}) => {
     <div className="property-item">
       <h3>Current Search Results</h3>
       <img className="image" src={propertyImg}/>
-      <table class="table table-striped">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col xs-6">Latitude</th>

@@ -47,17 +47,36 @@ class PropertyDetail extends React.Component {
       <div className="property-detail">
         <img src={imageUrl}></img>
         <div className="property-detail">
-          <div className="header-block">
-              <ul className="list-group list-group-flush">
-              {/* {this.renderBuildingsAroundProperty()}; */}
-              <li className="list-group-item">Total Area: {totalArea} </li>
-              <li className="list-group-item">Building Dist: {buildingDis} </li>
-              <li className="list-group-item">Longitude: </li>
-              <li className="list-group-item">Latitude: </li>
-              <li className="list-group-item">Total Building Area: {totalBuildingArea}</li>
-              <li className="list-group-item">Zone Density: {zoneDensity}</li>
-            </ul>
-          </div>
+          <table className="table table-striped">
+            <thead>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Total Area</th>
+                <td>{totalArea}</td>
+              </tr>
+              <tr>
+                <th scope="row">Building Distance</th>
+                <td>{buildingDis}</td>
+              </tr>
+              <tr>
+                <th scope="row">Total Building Area</th>
+                <td>{totalBuildingArea}</td>
+              </tr>
+              <tr>
+                <th scope="row">Zone Density</th>
+                <td>{zoneDensity}</td>
+              </tr>
+              <tr>
+                <th scope="row">Latitude</th>
+                <td>DATA</td>
+              </tr>
+              <tr>
+                <th scope="row">Longitude</th>
+                <td>DATA</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     )

@@ -6,7 +6,7 @@ import { GeolocateContext } from '../../providers/geolocate/geolocate.provider';
 
 import Autocomplete from 'react-google-autocomplete';
 import Geocode from "react-geocode";
-Geocode.setApiKey("AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0");
+Geocode.setApiKey("AIzaSyAvMyZR9_ng1BAktgNp2fbnjeTyJsZ43fk");
 Geocode.enableDebug()
 
 // const testCoordinates = [
@@ -78,7 +78,7 @@ class GoogleMap extends React.Component {
 
   //Retrieves information from initial geolocation;
   setCurrentPosition() {
-    Geocode.fromLatLng( this.state.currentPosition.lat , this.state.currentPosition.lng ).then(
+    Geocode.fromLatLng(this.state.currentPosition.lat , this.state.currentPosition.lng).then(
       response => {
         const address = response.results[0].formatted_address,
               addressArray = response.results[0].address_components,
@@ -141,16 +141,16 @@ class GoogleMap extends React.Component {
   onPlaceSelected = ( place ) => {
 		const address = place.formatted_address,
 		      addressArray =  place.address_components,
-		      city = this.getCity( addressArray ),
-		      area = this.getArea( addressArray ),
-		      state = this.getState( addressArray ),
+		      city = this.getCity(addressArray),
+		      area = this.getArea(addressArray),
+		      state = this.getState(addressArray),
 		      latValue = place.geometry.location.lat(),
 		      lngValue = place.geometry.location.lng();
 		this.setState({
-			address: ( address ) ? address : '',
-			area: ( area ) ? area : '',
-			city: ( city ) ? city : '',
-			state: ( state ) ? state : '',
+			address: (address) ? address : '',
+			area: (area) ? area : '',
+			city: (city) ? city : '',
+			state: (state) ? state : '',
 			currentPosition: {
 				lat: latValue,
 				lng: lngValue
@@ -160,11 +160,13 @@ class GoogleMap extends React.Component {
 
   // Sets the current map to current marker 
   onMarkerClick(props, marker, e) {
+    console.log('click');
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
+    console.log(this.state);
   }
 
   // Closes info window
@@ -186,7 +188,7 @@ class GoogleMap extends React.Component {
   }
 
   render() {
-    const { currentPosition, zoom, selectedPlace, properties, address, city, area, state } = this.state;
+    const { currentPosition, zoom, selectedPlace, properties, address} = this.state;
     const { lat, lng } = currentPosition;
     return (
       <div className="google-map">

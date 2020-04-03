@@ -13,14 +13,16 @@ export const PropertyContext = createContext({
 
 const PropertyProvider = ({children}) => {
   const [properties, setProperties] = useState([]);
-  const [propertyImg, setPropertyImg] = useState('https://images.unsplash.com/photo-1578321526989-e9b3cb747cfb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');
+  const [propertyImg, setPropertyImg] = useState('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2389&q=80');
 
   const getProperties = (lng, lat, radius) => {
     fetchProperties();
   }
 
   const getPropertyImage = () => {
-    return fetchPropertyImage();
+    return fetchPropertyImage().then(res => {
+      setPropertyImg(res);
+    });
   }
 
   const getPropertyStatistics = () => {

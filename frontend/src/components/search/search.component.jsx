@@ -11,27 +11,25 @@ const Search = () => {
   const { getPropertyImage } = useContext(PropertyContext)
   const { getAddressFromCoordinates, getCoordinatesFromAddress, errorMsg } = useContext(GeolocateContext);
   
-  const [lng, setLng] = useState('');
-  const [lat, setLat] = useState('');
+  const [lat, setLat] = useState(37.786213321321);
+  const [lng, setLng] = useState(-122.4045);
   const [rad, setRad] = useState(10000);
   const [address, setAddress] = useState('');
   const [searchMode, setSearchMode] = useState(false);
   const [searchName, setSearchName] = useState('Coordinates');
-  const [propertyImageUrl, setPropertyImageUrl] = useState('');
   const [foundProperty, setFoundProperty] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     getPropertyImage().then(res => {
-      setPropertyImageUrl(res);
       setFoundProperty(true);
     });
 
     if (!searchMode) {
-      getAddressFromCoordinates();
+      getAddressFromCoordinates(lat, lng);
       setFoundProperty(true);
     } else {
-      getCoordinatesFromAddress();
+      getCoordinatesFromAddress(address);
       setFoundProperty(true);
     }
   }
@@ -133,7 +131,7 @@ const Search = () => {
 
   return (
     <div className="search">
-      { foundProperty && !errorMsg ? <PropertyItem imageUrl={propertyImageUrl}/> : null }
+      { foundProperty && !errorMsg ? <PropertyItem/> : null }
       <h3>Search Parameters</h3>
       <form className="form-group" onSubmit={handleSubmit}>
         {renderSearchParameters()}
